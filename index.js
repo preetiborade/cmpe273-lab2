@@ -1,3 +1,4 @@
+
 var connect = require('connect');
 var login = require('./login');
 
@@ -15,7 +16,7 @@ function main(request, response, next) {
                 case 'GET': get(request, response); break;
                 case 'POST': post(request, response); break;
                 case 'DELETE': del(request, response); break;
-                case 'PUT': post(request, response); break;
+                case 'PUT': put(request, response); break;
         }
 };
 
@@ -63,17 +64,14 @@ function del(request, response) {
 
 function put(request, response){
 
-        
-
-
-
-        response.end("Re-freshed session id\n");
-
+        // TODO: refresh session_idon id; similar to the post() function
+        var cookies = request.cookies;
+        var newSession_ID = login.refresh(cookies['session_id']);
+        response.setHeader('Set-Cookie', 'session_id=' + newSession_ID);
+        response.end(login.hello(newSession_ID));
 };
 
 app.listen(8000);
 
 console.log("Node.JS server running at 8000...");
-
-
-                                                                         
+                                                                              
