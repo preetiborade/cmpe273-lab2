@@ -66,7 +66,6 @@ function put(request, response){
         
 
 
-        // TODO: refresh session id; similar to the post() function
 
         response.end("Re-freshed session id\n");
 
